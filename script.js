@@ -11,9 +11,10 @@ function CPS(time) {
         started = true;
         setTimeout(() => {
             started = false;
-
-            
-        }, time);
+            alert("CPS: " + clicks/time)
+            button.innerHTML = "CPS TEST"
+            clicks = 1;
+        }, time*1000);
     }
 button.innerHTML = clicks
 }

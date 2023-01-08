@@ -6,7 +6,7 @@
     justify-content: center;
     flex-direction: column;
 }
-#main {
+#body {
 flex-direction: row;
 }
 .text {
@@ -16,6 +16,11 @@ flex-direction: row;
     text-align: center;
 }
 .cps {
-    width: fit-content;
+    width: 5rem;
     height: 2rem;
+    font-family: sans-serif; 
+}
+#padding-up-small {
+    margin-top: -1rem;
+    padding-top: 0;
 }
