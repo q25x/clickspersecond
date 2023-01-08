@@ -15,3 +15,7 @@ flex-direction: row;
 .thing {
     text-align: center;
 }
+.cps {
+    width: fit-content;
+    height: 2rem;
+}
