@@ -13,13 +13,11 @@ function CPS(time) {
     else {
         started = true;
         setTimeout(() => {
-            setTimeout(() => {
-                started = false;
-            }, 500);
+            started = false;
             alert("CPS: " + clicks/time)
             button.innerHTML = "CPS TEST";
-            buttom.button.style.backgroundColor = "rgba(0,0,0,0.7)"
             clicks = 1;
+            buttom.button.style.backgroundColor = "rgba(0,0,0,0.7)"
         }, time*1000);
     }
     let clr = map_range(clicks,0,60,0,255)
