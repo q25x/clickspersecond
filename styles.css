@@ -1,5 +1,7 @@
 body {
-    background: url('evening-landscape-minimal-4k-kl-1920x1080.jpg') no-repeat fixed bottom;
+    background: url('evening-landscape-minimal-4k-kl-1920x1080.jpg');
+    background-position-x: 15%;
+    background-position-y: 15%;
 }
 .center {
     width: 100%;
