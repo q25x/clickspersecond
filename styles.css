@@ -62,3 +62,10 @@ h1:hover::after {
     background-color: rgba(51, 51, 51, 0.7);
     transition: background-color 2s;
 }
+
+.leaderboard {
+    color:black;
+    position: absolute;
+    top:20%;
+    left:2%;
+}
