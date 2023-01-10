@@ -22,29 +22,35 @@ let leaderboard_item = {}
 
 
 function setLeaderboard() {
-    debugger;
-    if(leaderboard.length == 0) {
-        leaderboard.push(leaderboard_item);
-        return;
-    }
     let ni = false;
-    leaderboard.forEach(e => {
-        if(e.cps < leaderboard_item.cps && e.name == leaderboard_item.name) {
-            e.cps = leaderboard_item.cps
+    if(leaderboard.length == 0) {
+        ni = true;
+    }
+    console.log(leaderboard_item);
+    for(let i=0; i<leaderboard.length;i++) {
+        if(leaderboard[i].cps < leaderboard_item.cps && leaderboard[i].name === leaderboard_item.name) {
+            leaderboard[i].cps = leaderboard_item.cps
             localStorage.setItem("cpslb", JSON.stringify(leaderboard));
-            return;
+            console.log("zmiana");
+            ni = false;
+            break;
         }
-        else if(e.name == leaderboard_item.name) {
-            return;
+        else if(leaderboard[i].name == leaderboard_item.name) {
+            console.log("juz jest");
+            ni = false;
+            break;
         }
         else {
+            console.log("ni ma");
             ni = true;
         }
-    })
-    if(ni==true) {
+    }
+    if(ni) {
     leaderboard.push(leaderboard_item);
+    console.log("push!");
     localStorage.setItem("cpslb", JSON.stringify(leaderboard));
     }
+    leaderboard.sort((u1, u2) => (u1.cps < u2.cps) ? 1 : (u1.cps > u2.cps) ? -1 : 0);
 }
 
 
@@ -53,26 +59,20 @@ function refreshLeaderboard() {
     leaderboard.forEach(e => {
         let real_leaderboard_item = document.createElement("div");
         real_leaderboard_item.innerHTML = e.name + ": " + e.cps;
+        real_leaderboard_item.style.marginBottom = "3%";
+        real_leaderboard_item.style.textShadow = "none"
         real_leaderboard.appendChild(real_leaderboard_item);
     });
-
+    try {
+        real_leaderboard.firstElementChild.style.color = "gold";
+        real_leaderboard.firstElementChild.style.fontWeight = "bold";
+        real_leaderboard.firstElementChild.style.textShadow = "black 0px 0px 3px";
+        real_leaderboard.firstElementChild.innerHTML = "🏆  " + real_leaderboard.firstElementChild.innerHTML;
+    } catch (error) {
+        console.warn(error);
+    }
 }
 refreshLeaderboard();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 function CPS(time) {
     if(started===true) {
         clicks += 1;
@@ -80,9 +80,10 @@ function CPS(time) {
     else {
         started = true;
         setTimeout(() => {
+            started = false;
             let name = prompt(`CPS: ${clicks/time}`, "your name here");
-            if(name!==null || name.length >= 3 || name.length <= 16) {
-                leaderboard_item = {name: name, cps: clicks/time}
+            if(name!=null && name.length >= 3 && name.length <= 20) {
+                leaderboard_item = {name: name, cps: clicks/time};
                 setLeaderboard();
                 refreshLeaderboard();
 
@@ -91,7 +92,6 @@ function CPS(time) {
             localStorage.setItem("cpslb", JSON.stringify(leaderboard));
             
             clicks = 1;
-            started = false;
             button.style.backgroundColor = "rgba(0,0,0,0.7)"
         }, time*1000);
     }
@@ -99,36 +99,6 @@ function CPS(time) {
     button.innerHTML = clicks;
     button.style.backgroundColor = "rgba("+clr+","+clr+","+clr+",0.7)"
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // moving background code
 let width, height
 window.onload = () => {

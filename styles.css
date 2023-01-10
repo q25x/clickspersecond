@@ -68,4 +68,7 @@ h1:hover::after {
     position: absolute;
     top:20%;
     left:2%;
+    font-size: large;
+    font-family: sans-serif;
+    text-shadow: black 1px 1px 1px;   
 }
